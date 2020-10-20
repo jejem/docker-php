@@ -4,7 +4,9 @@ MAINTAINER Jérémy "Jejem" Desvages <jejem@phyrexia.org>
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+        git \
         locales \
+        unzip \
     ; \
     rm -rf /var/lib/apt/lists/*
 
