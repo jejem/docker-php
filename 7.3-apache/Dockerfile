@@ -5,6 +5,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         git \
+        libmagickwand-dev \
         libmemcached-dev \
         locales \
         unzip \
@@ -36,11 +37,19 @@ RUN set -eux; \
     docker-php-ext-configure gettext; \
     docker-php-ext-configure mysqli; \
     docker-php-ext-configure pdo_mysql; \
-    docker-php-ext-install gettext mysqli pdo_mysql
+    docker-php-ext-install \
+        gettext \
+        mysqli \
+        pdo_mysql \
+    ;
 
 RUN set -eux; \
+    pecl install imagick; \
     pecl install memcached; \
-    docker-php-ext-enable memcached
+    docker-php-ext-enable \
+        imagick \
+        memcached \
+    ;
 
 RUN set -eux; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
