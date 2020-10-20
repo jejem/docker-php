@@ -25,6 +25,10 @@ RUN set -eux; \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure tzdata
 
 RUN set -eux; \
+    ln -s php.ini-production "$PHP_INI_DIR/php.ini"; \
+    docker-php-ext-enable opcache
+
+RUN set -eux; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
     php composer-setup.php --install-dir="/usr/local/bin"; \
     ln -s composer.phar /usr/local/bin/composer; \
