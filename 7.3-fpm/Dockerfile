@@ -5,8 +5,10 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         git \
+        libmemcached-dev \
         locales \
         unzip \
+        zlib1g-dev \
     ; \
     rm -rf /var/lib/apt/lists/*
 
@@ -29,6 +31,16 @@ RUN set -eux; \
 RUN set -eux; \
     ln -s php.ini-production "$PHP_INI_DIR/php.ini"; \
     docker-php-ext-enable opcache
+
+RUN set -eux; \
+    docker-php-ext-configure gettext; \
+    docker-php-ext-configure mysqli; \
+    docker-php-ext-configure pdo_mysql; \
+    docker-php-ext-install gettext mysqli pdo_mysql
+
+RUN set -eux; \
+    pecl install memcached; \
+    docker-php-ext-enable memcached
 
 RUN set -eux; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
