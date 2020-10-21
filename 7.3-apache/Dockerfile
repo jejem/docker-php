@@ -30,6 +30,11 @@ RUN set -eux; \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure tzdata
 
 RUN set -eux; \
+    a2enmod \
+        rewrite \
+    ;
+
+RUN set -eux; \
     ln -s php.ini-production "$PHP_INI_DIR/php.ini"; \
     docker-php-ext-enable opcache
 
@@ -44,9 +49,11 @@ RUN set -eux; \
     ;
 
 RUN set -eux; \
+    pecl install apcu; \
     pecl install imagick; \
     pecl install memcached; \
     docker-php-ext-enable \
+        apcu \
         imagick \
         memcached \
     ;

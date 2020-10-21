@@ -44,9 +44,11 @@ RUN set -eux; \
     ;
 
 RUN set -eux; \
+    pecl install apcu; \
     pecl install imagick; \
     pecl install memcached; \
     docker-php-ext-enable \
+        apcu \
         imagick \
         memcached \
     ;
