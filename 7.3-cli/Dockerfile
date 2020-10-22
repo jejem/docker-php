@@ -5,8 +5,11 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         git \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
         libmagickwand-dev \
         libmemcached-dev \
+        libpng-dev \
         locales \
         unzip \
         zlib1g-dev \
@@ -35,10 +38,12 @@ RUN set -eux; \
     docker-php-ext-enable opcache
 
 RUN set -eux; \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/lib --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib; \
     docker-php-ext-configure gettext; \
     docker-php-ext-configure mysqli; \
     docker-php-ext-configure pdo_mysql; \
     docker-php-ext-install \
+        gd \
         gettext \
         mysqli \
         pdo_mysql \
