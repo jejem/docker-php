@@ -35,6 +35,7 @@ RUN set -eux; \
     ;
 
 RUN set -eux; \
+    ln -s /usr/local/bin/php /usr/bin/php; \
     ln -s php.ini-production "$PHP_INI_DIR/php.ini"; \
     docker-php-ext-enable opcache
 
