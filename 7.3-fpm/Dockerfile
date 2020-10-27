@@ -38,7 +38,7 @@ RUN set -eux; \
     docker-php-ext-enable opcache
 
 RUN set -eux; \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/lib --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib; \
+    docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib-dir; \
     docker-php-ext-configure gettext; \
     docker-php-ext-configure mysqli; \
     docker-php-ext-configure pdo_mysql; \
