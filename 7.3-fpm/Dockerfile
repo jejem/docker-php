@@ -6,10 +6,12 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends \
         git \
         libfreetype6-dev \
+        libicu-dev \
         libjpeg62-turbo-dev \
         libmagickwand-dev \
         libmemcached-dev \
         libpng-dev \
+        libzstd-dev \
         locales \
         unzip \
         zlib1g-dev \
@@ -40,11 +42,13 @@ RUN set -eux; \
 RUN set -eux; \
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib-dir; \
     docker-php-ext-configure gettext; \
+    docker-php-ext-configure intl; \
     docker-php-ext-configure mysqli; \
     docker-php-ext-configure pdo_mysql; \
     docker-php-ext-install \
         gd \
         gettext \
+        intl \
         mysqli \
         pdo_mysql \
     ;
@@ -53,10 +57,14 @@ RUN set -eux; \
     pecl install apcu; \
     pecl install imagick; \
     pecl install memcached; \
+    pecl install redis; \
+    pecl install xdebug; \
     docker-php-ext-enable \
         apcu \
         imagick \
         memcached \
+        redis \
+        xdebug \
     ;
 
 RUN set -eux; \
