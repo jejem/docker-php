@@ -8,6 +8,7 @@ RUN set -eux; \
         libfreetype6-dev \
         libicu-dev \
         libjpeg62-turbo-dev \
+        liblzf-dev \
         libmagickwand-dev \
         libmemcached-dev \
         libpng-dev \
@@ -73,14 +74,18 @@ RUN set -eux; \
 
 RUN set -eux; \
     pecl install apcu; \
+    pecl install igbinary; \
     pecl install imagick; \
     pecl install memcached; \
+    pecl install msgpack; \
     pecl install redis; \
     pecl install xdebug; \
     docker-php-ext-enable \
         apcu \
+        igbinary \
         imagick \
         memcached \
+        msgpack \
         redis \
         xdebug \
     ;
