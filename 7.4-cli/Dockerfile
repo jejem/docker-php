@@ -8,7 +8,6 @@ RUN set -eux; \
         libfreetype6-dev \
         libicu-dev \
         libjpeg62-turbo-dev \
-        liblzf-dev \
         libmagickwand-dev \
         libmemcached-dev \
         libpng-dev \
