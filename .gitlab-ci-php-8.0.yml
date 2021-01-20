@@ -1,0 +1,143 @@
+build-php-8.0-cli:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-cli/*
+  script:
+    - docker build --pull --no-cache -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA 8.0-cli/
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA
+
+test-php-8.0-cli:
+  stage: test
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-cli/*
+  script:
+    #- docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA
+    - exit 0
+
+deploy-php-8.0-cli:
+  stage: deploy
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-cli/*
+  script:
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA
+    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli
+
+deploy-php-8.0-cli-to-hub:
+  stage: deploy
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-cli/*
+  script:
+    - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA
+    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:8.0-cli
+    - docker push $DOCKER_HUB_REPOSITORY:8.0-cli
+    - docker rmi $DOCKER_HUB_REPOSITORY:8.0-cli
+
+build-php-8.0-fpm:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-fpm/*
+  script:
+    - docker build --pull --no-cache -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA 8.0-fpm/
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA
+
+test-php-8.0-fpm:
+  stage: test
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-fpm/*
+  script:
+    #- docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA
+    - exit 0
+
+deploy-php-8.0-fpm:
+  stage: deploy
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-fpm/*
+  script:
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA
+    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm
+
+deploy-php-8.0-fpm-to-hub:
+  stage: deploy
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-fpm/*
+  script:
+    - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA
+    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:8.0-fpm
+    - docker push $DOCKER_HUB_REPOSITORY:8.0-fpm
+    - docker rmi $DOCKER_HUB_REPOSITORY:8.0-fpm
+
+build-php-8.0-apache:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-apache/*
+  script:
+    - docker build --pull --no-cache -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA 8.0-apache/
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA
+
+test-php-8.0-apache:
+  stage: test
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-apache/*
+  script:
+    #- docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA
+    - exit 0
+
+deploy-php-8.0-apache:
+  stage: deploy
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-apache/*
+  script:
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA
+    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache
+    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache
+
+deploy-php-8.0-apache-to-hub:
+  stage: deploy
+  only:
+    refs:
+      - master
+    changes:
+      - 8.0-apache/*
+  script:
+    - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
+    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA
+    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:8.0-apache
+    - docker push $DOCKER_HUB_REPOSITORY:8.0-apache
+    - docker rmi $DOCKER_HUB_REPOSITORY:8.0-apache
