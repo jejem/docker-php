@@ -11,6 +11,7 @@ RUN set -eux; \
         libmagickwand-dev \
         libmemcached-dev \
         libpng-dev \
+        libzip-dev \
         libzstd-dev \
         locales \
         unzip \
@@ -45,12 +46,14 @@ RUN set -eux; \
     docker-php-ext-configure intl; \
     docker-php-ext-configure mysqli; \
     docker-php-ext-configure pdo_mysql; \
+    docker-php-ext-configure zip; \
     docker-php-ext-install \
         gd \
         gettext \
         intl \
         mysqli \
         pdo_mysql \
+        zip \
     ;
 
 RUN set -eux; \
