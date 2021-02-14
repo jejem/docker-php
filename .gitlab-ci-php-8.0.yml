@@ -6,7 +6,7 @@ build-php-8.0-cli:
     changes:
       - 8.0-cli/*
   script:
-    - docker build --pull --no-cache -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA 8.0-cli/
+    - docker build --pull -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA 8.0-cli/
     - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-cli-$CI_COMMIT_SHORT_SHA
 
 test-php-8.0-cli:
@@ -54,7 +54,7 @@ build-php-8.0-fpm:
     changes:
       - 8.0-fpm/*
   script:
-    - docker build --pull --no-cache -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA 8.0-fpm/
+    - docker build --pull -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA 8.0-fpm/
     - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-fpm-$CI_COMMIT_SHORT_SHA
 
 test-php-8.0-fpm:
@@ -102,7 +102,7 @@ build-php-8.0-apache:
     changes:
       - 8.0-apache/*
   script:
-    - docker build --pull --no-cache -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA 8.0-apache/
+    - docker build --pull -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA 8.0-apache/
     - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:8.0-apache-$CI_COMMIT_SHORT_SHA
 
 test-php-8.0-apache:
