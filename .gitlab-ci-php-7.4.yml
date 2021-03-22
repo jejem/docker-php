@@ -6,8 +6,8 @@ build-php-7.4-cli:
     changes:
       - 7.4-cli/*
   script:
-    - docker build --pull -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA 7.4-cli/
-    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA
+    - docker build --pull -t $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA 7.4-cli/
+    - docker push $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA
 
 test-php-7.4-cli:
   stage: test
@@ -17,7 +17,7 @@ test-php-7.4-cli:
     changes:
       - 7.4-cli/*
   script:
-    #- docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA
+    #- docker pull $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA
     - exit 0
 
 deploy-php-7.4-cli:
@@ -28,9 +28,9 @@ deploy-php-7.4-cli:
     changes:
       - 7.4-cli/*
   script:
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA
-    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli
-    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli
+    - docker pull $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:7.4-cli
+    - docker push $CI_REGISTRY_IMAGE:7.4-cli
 
 deploy-php-7.4-cli-to-hub:
   stage: deploy
@@ -41,8 +41,8 @@ deploy-php-7.4-cli-to-hub:
       - 7.4-cli/*
   script:
     - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA
-    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-cli-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:7.4-cli
+    - docker pull $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:7.4-cli-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:7.4-cli
     - docker push $DOCKER_HUB_REPOSITORY:7.4-cli
     - docker rmi $DOCKER_HUB_REPOSITORY:7.4-cli
 
@@ -54,8 +54,8 @@ build-php-7.4-fpm:
     changes:
       - 7.4-fpm/*
   script:
-    - docker build --pull -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA 7.4-fpm/
-    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA
+    - docker build --pull -t $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA 7.4-fpm/
+    - docker push $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA
 
 test-php-7.4-fpm:
   stage: test
@@ -65,7 +65,7 @@ test-php-7.4-fpm:
     changes:
       - 7.4-fpm/*
   script:
-    #- docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA
+    #- docker pull $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA
     - exit 0
 
 deploy-php-7.4-fpm:
@@ -76,9 +76,9 @@ deploy-php-7.4-fpm:
     changes:
       - 7.4-fpm/*
   script:
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA
-    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm
-    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm
+    - docker pull $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:7.4-fpm
+    - docker push $CI_REGISTRY_IMAGE:7.4-fpm
 
 deploy-php-7.4-fpm-to-hub:
   stage: deploy
@@ -89,8 +89,8 @@ deploy-php-7.4-fpm-to-hub:
       - 7.4-fpm/*
   script:
     - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA
-    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-fpm-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:7.4-fpm
+    - docker pull $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:7.4-fpm-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:7.4-fpm
     - docker push $DOCKER_HUB_REPOSITORY:7.4-fpm
     - docker rmi $DOCKER_HUB_REPOSITORY:7.4-fpm
 
@@ -102,8 +102,8 @@ build-php-7.4-apache:
     changes:
       - 7.4-apache/*
   script:
-    - docker build --pull -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA 7.4-apache/
-    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA
+    - docker build --pull -t $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA 7.4-apache/
+    - docker push $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA
 
 test-php-7.4-apache:
   stage: test
@@ -113,7 +113,7 @@ test-php-7.4-apache:
     changes:
       - 7.4-apache/*
   script:
-    #- docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA
+    #- docker pull $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA
     - exit 0
 
 deploy-php-7.4-apache:
@@ -124,9 +124,9 @@ deploy-php-7.4-apache:
     changes:
       - 7.4-apache/*
   script:
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA
-    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache
-    - docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache
+    - docker pull $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:7.4-apache
+    - docker push $CI_REGISTRY_IMAGE:7.4-apache
 
 deploy-php-7.4-apache-to-hub:
   stage: deploy
@@ -137,7 +137,7 @@ deploy-php-7.4-apache-to-hub:
       - 7.4-apache/*
   script:
     - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA
-    - docker tag $DOCKER_REGISTRY/$DOCKER_REPOSITORY:7.4-apache-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:7.4-apache
+    - docker pull $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:7.4-apache-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:7.4-apache
     - docker push $DOCKER_HUB_REPOSITORY:7.4-apache
     - docker rmi $DOCKER_HUB_REPOSITORY:7.4-apache
