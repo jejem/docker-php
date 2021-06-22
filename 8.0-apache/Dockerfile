@@ -77,6 +77,7 @@ RUN set -eux; \
 RUN set -eux; \
     pecl install apcu; \
     pecl install igbinary; \
+    pecl install imagick; \
     pecl install memcached; \
     pecl install msgpack; \
     pecl install redis; \
@@ -84,25 +85,12 @@ RUN set -eux; \
     docker-php-ext-enable \
         apcu \
         igbinary \
+        imagick \
         memcached \
         msgpack \
         redis \
         xdebug \
     ;
-
-# https://github.com/Imagick/imagick/issues/358
-RUN set -eux; \
-    cd /usr/local/src; \
-    git clone https://github.com/Imagick/imagick; \
-    cd imagick; \
-    git checkout 132a11fd26675db9eb9f0e9a3e2887c161875206; \
-    phpize; \
-    ./configure; \
-    make; \
-    make install; \
-    cd ..; \
-    rm -rf imagick; \
-    docker-php-ext-enable imagick
 
 RUN set -eux; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
