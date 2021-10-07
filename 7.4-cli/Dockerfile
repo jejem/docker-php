@@ -63,6 +63,7 @@ RUN set -eux; \
     pecl install memcached; \
     pecl install msgpack; \
     pecl install redis; \
+    pecl install uploadprogress; \
     pecl install xdebug; \
     docker-php-ext-enable \
         apcu \
@@ -71,6 +72,7 @@ RUN set -eux; \
         memcached \
         msgpack \
         redis \
+        uploadprogress \
         xdebug \
     ;
 
