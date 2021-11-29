@@ -9,6 +9,7 @@ stages:
   - deploy
 
 include:
+  - local: '.gitlab-ci-php-7.2.yml'
   - local: '.gitlab-ci-php-7.3.yml'
   - local: '.gitlab-ci-php-7.4.yml'
   - local: '.gitlab-ci-php-8.0.yml'
