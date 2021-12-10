@@ -11,6 +11,7 @@ build-php-7.2-cli:
 
 test-php-7.2-cli:
   stage: test
+  needs: ["build-php-7.2-cli"]
   only:
     refs:
       - master
@@ -22,6 +23,7 @@ test-php-7.2-cli:
 
 deploy-php-7.2-cli:
   stage: deploy
+  needs: ["test-php-7.2-cli"]
   only:
     refs:
       - master
@@ -34,6 +36,7 @@ deploy-php-7.2-cli:
 
 deploy-php-7.2-cli-to-hub:
   stage: deploy
+  needs: ["test-php-7.2-cli"]
   only:
     refs:
       - master
@@ -59,6 +62,7 @@ build-php-7.2-fpm:
 
 test-php-7.2-fpm:
   stage: test
+  needs: ["build-php-7.2-fpm"]
   only:
     refs:
       - master
@@ -70,6 +74,7 @@ test-php-7.2-fpm:
 
 deploy-php-7.2-fpm:
   stage: deploy
+  needs: ["test-php-7.2-fpm"]
   only:
     refs:
       - master
@@ -82,6 +87,7 @@ deploy-php-7.2-fpm:
 
 deploy-php-7.2-fpm-to-hub:
   stage: deploy
+  needs: ["test-php-7.2-fpm"]
   only:
     refs:
       - master
@@ -107,6 +113,7 @@ build-php-7.2-apache:
 
 test-php-7.2-apache:
   stage: test
+  needs: ["build-php-7.2-apache"]
   only:
     refs:
       - master
@@ -118,6 +125,7 @@ test-php-7.2-apache:
 
 deploy-php-7.2-apache:
   stage: deploy
+  needs: ["test-php-7.2-apache"]
   only:
     refs:
       - master
@@ -130,6 +138,7 @@ deploy-php-7.2-apache:
 
 deploy-php-7.2-apache-to-hub:
   stage: deploy
+  needs: ["test-php-7.2-apache"]
   only:
     refs:
       - master
