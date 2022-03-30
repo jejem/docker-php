@@ -4,6 +4,7 @@ MAINTAINER Jérémy "Jejem" Desvages <jejem@phyrexia.org>
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+        elinks \
         git \
         libfreetype6-dev \
         libicu-dev \
