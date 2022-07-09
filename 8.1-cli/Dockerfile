@@ -5,6 +5,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         git \
+        libcurl4-openssl-dev \
         libfreetype6-dev \
         libicu-dev \
         libjpeg62-turbo-dev \
@@ -41,6 +42,7 @@ RUN set -eux; \
     docker-php-ext-enable opcache
 
 RUN set -eux; \
+    docker-php-ext-configure curl; \
     docker-php-ext-configure gd --with-freetype --with-jpeg; \
     docker-php-ext-configure gettext; \
     docker-php-ext-configure intl; \
@@ -48,6 +50,7 @@ RUN set -eux; \
     docker-php-ext-configure pdo_mysql; \
     docker-php-ext-configure zip; \
     docker-php-ext-install \
+        curl \
         gd \
         gettext \
         intl \
