@@ -17,3 +17,4 @@ include:
   - local: '.gitlab-ci-php-7.4.yml'
   - local: '.gitlab-ci-php-8.0.yml'
   - local: '.gitlab-ci-php-8.1.yml'
+  - local: '.gitlab-ci-php-8.2.yml'
