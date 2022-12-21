@@ -1,4 +1,4 @@
-FROM php:8.2-rc-apache
+FROM php:8.2-apache
 MAINTAINER Jérémy "Jejem" Desvages <jejem@phyrexia.org>
 
 RUN set -eux; \
@@ -67,6 +67,7 @@ RUN set -eux; \
     docker-php-ext-configure intl; \
     docker-php-ext-configure mysqli; \
     docker-php-ext-configure pdo_mysql; \
+    docker-php-ext-configure sysvsem; \
     docker-php-ext-configure zip; \
     docker-php-ext-install \
         curl \
@@ -75,6 +76,7 @@ RUN set -eux; \
         intl \
         mysqli \
         pdo_mysql \
+        sysvsem \
         zip \
     ;
 
