@@ -79,8 +79,4 @@ RUN set -eux; \
         uploadprogress \
     ;
 
-RUN set -eux; \
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
-    php composer-setup.php --install-dir="/usr/local/bin"; \
-    ln -s composer.phar /usr/local/bin/composer; \
-    php -r "unlink('composer-setup.php');"
+COPY --from=composer /usr/bin/composer /usr/bin/composer
