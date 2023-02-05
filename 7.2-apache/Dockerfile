@@ -51,6 +51,7 @@ RUN set -eux; \
         remoteip \
     ; \
     a2enmod \
+        http2 \
         remoteip \
         rewrite \
     ;
