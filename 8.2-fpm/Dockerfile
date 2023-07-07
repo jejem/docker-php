@@ -12,6 +12,7 @@ RUN set -eux; \
         libmagickwand-dev \
         libmemcached-dev \
         libpng-dev \
+        libssl-dev \
         libzip-dev \
         libzstd-dev \
         locales \
