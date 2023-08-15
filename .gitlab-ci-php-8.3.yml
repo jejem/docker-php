@@ -1,0 +1,152 @@
+build-php-8.3-cli:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-cli/*
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA 8.3-cli/
+    - docker push $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA
+
+test-php-8.3-cli:
+  stage: test
+  needs: ["build-php-8.3-cli"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-cli/*
+  script:
+    #- docker pull $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA
+    - exit 0
+
+deploy-php-8.3-cli:
+  stage: deploy
+  needs: ["test-php-8.3-cli"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-cli/*
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:8.3-cli
+    - docker push $CI_REGISTRY_IMAGE:8.3-cli
+
+deploy-php-8.3-cli-to-hub:
+  stage: deploy
+  needs: ["test-php-8.3-cli"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-cli/*
+  script:
+    - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
+    - docker pull $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:8.3-cli-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:8.3-cli
+    - docker push $DOCKER_HUB_REPOSITORY:8.3-cli
+    - docker rmi $DOCKER_HUB_REPOSITORY:8.3-cli
+
+build-php-8.3-fpm:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-fpm/*
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA 8.3-fpm/
+    - docker push $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA
+
+test-php-8.3-fpm:
+  stage: test
+  needs: ["build-php-8.3-fpm"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-fpm/*
+  script:
+    #- docker pull $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA
+    - exit 0
+
+deploy-php-8.3-fpm:
+  stage: deploy
+  needs: ["test-php-8.3-fpm"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-fpm/*
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:8.3-fpm
+    - docker push $CI_REGISTRY_IMAGE:8.3-fpm
+
+deploy-php-8.3-fpm-to-hub:
+  stage: deploy
+  needs: ["test-php-8.3-fpm"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-fpm/*
+  script:
+    - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
+    - docker pull $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:8.3-fpm-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:8.3-fpm
+    - docker push $DOCKER_HUB_REPOSITORY:8.3-fpm
+    - docker rmi $DOCKER_HUB_REPOSITORY:8.3-fpm
+
+build-php-8.3-apache:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-apache/*
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA 8.3-apache/
+    - docker push $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA
+
+test-php-8.3-apache:
+  stage: test
+  needs: ["build-php-8.3-apache"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-apache/*
+  script:
+    #- docker pull $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA
+    - exit 0
+
+deploy-php-8.3-apache:
+  stage: deploy
+  needs: ["test-php-8.3-apache"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-apache/*
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:8.3-apache
+    - docker push $CI_REGISTRY_IMAGE:8.3-apache
+
+deploy-php-8.3-apache-to-hub:
+  stage: deploy
+  needs: ["test-php-8.3-apache"]
+  only:
+    refs:
+      - master
+    changes:
+      - 8.3-apache/*
+  script:
+    - echo $DOCKER_HUB_PASSWORD |docker login -u $DOCKER_HUB_USER --password-stdin
+    - docker pull $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:8.3-apache-$CI_COMMIT_SHORT_SHA $DOCKER_HUB_REPOSITORY:8.3-apache
+    - docker push $DOCKER_HUB_REPOSITORY:8.3-apache
+    - docker rmi $DOCKER_HUB_REPOSITORY:8.3-apache
