@@ -1,4 +1,4 @@
-FROM php:8.3-rc-fpm
+FROM php:8.3-fpm
 MAINTAINER Jérémy "Jejem" Desvages <jejem@phyrexia.org>
 
 RUN set -eux; \

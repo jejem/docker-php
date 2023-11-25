@@ -1,4 +1,4 @@
-FROM php:8.3-rc-cli
+FROM php:8.3-cli
 MAINTAINER Jérémy "Jejem" Desvages <jejem@phyrexia.org>
 
 RUN set -eux; \

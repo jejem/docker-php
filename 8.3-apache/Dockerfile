@@ -1,4 +1,4 @@
-FROM php:8.3-rc-apache
+FROM php:8.3-apache
 MAINTAINER Jérémy "Jejem" Desvages <jejem@phyrexia.org>
 
 RUN set -eux; \
