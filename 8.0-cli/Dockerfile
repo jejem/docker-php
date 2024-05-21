@@ -69,6 +69,7 @@ RUN set -eux; \
     pecl install msgpack; \
     pecl install redis; \
     pecl install uploadprogress; \
+    pecl install xdebug; \
     docker-php-ext-enable \
         apcu \
         igbinary \
