@@ -67,7 +67,7 @@ RUN set -eux; \
     pecl install imagick; \
     pecl install memcached; \
     pecl install msgpack; \
-    pecl install redis; \
+    pecl install redis-6.0.2; \
     pecl install uploadprogress; \
     pecl install xdebug-3.1.6; \
     docker-php-ext-enable \
